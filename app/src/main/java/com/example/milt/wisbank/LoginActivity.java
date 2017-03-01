@@ -14,6 +14,8 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.content.Intent;
+
 
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +32,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -66,6 +73,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
+        TextView registerScreen = (TextView) findViewById(R.id.link_signup);
+        registerScreen.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), signup.class);
+                startActivity(intent);
+            }
+        });
+
         mEmailView = (EditText) findViewById(R.id.email);
         populateAutoComplete();
 
@@ -82,7 +99,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
 
+
+
     }
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
